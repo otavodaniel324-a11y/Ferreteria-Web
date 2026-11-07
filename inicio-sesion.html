@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de Sesión - Atlas</title>
+    <!-- Enlace a tu archivo CSS -->
+    <link rel="stylesheet" href="Inicio-sesion.css">
+</head>
+<body>
+
+    <!-- HEADER / MENÚ DE NAVEGACIÓN -->
+    <header class="header-atlas">
+        <div class="header-eslogan">
+            <p>Te brindamos confianza, inventario surtido y asesoría<br>técnica que convierten cada compra en un cliente<br>recurrente.</p>
+        </div>
+        
+        <div class="logo-container">
+            <img src="imagenes/logo1.png" alt="Ferretería Atlas Construcciones">
+        </div>
+    </header>
+
+    <!-- CONTENEDOR PRINCIPAL DEL LOGIN -->
+    <main class="main-login">
+        
+        <div class="login-card">
+            <!-- Pestañas para alternar entre Login y Registro -->
+            <div class="tabs">
+                <button class="tab-btn active" onclick="mostrarFormulario('login')">Iniciar Sesión</button>
+                <button class="tab-btn" onclick="mostrarFormulario('registro')">Registrarse</button>
+            </div>
+
+            <!-- FORMULARIO DE INICIO DE SESIÓN -->
+            <form id="form-login" class="formulario active">
+                <h2>Bienvenido de nuevo</h2>
+                <p class="subtitulo">Ingresa tus credenciales para acceder.</p>
+                
+                <div class="input-group">
+                    <label for="login-email">Correo Electrónico</label>
+                    <input type="email" id="login-email" placeholder="tu@correo.com" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="login-password">Contraseña</label>
+                    <input type="password" id="login-password" placeholder="••••••••" required>
+                </div>
+
+                <div class="opciones-extra">
+                    <label class="recordarme">
+                        <input type="checkbox"> Recordarme
+                    </label>
+                    <!-- Enlace para olvidar contraseña -->
+                    <a href="#" class="olvidar-pass" onclick="recuperarPassword(event)">¿Olvidaste tu contraseña?</a>
+                </div>
+
+                <button type="submit" class="btn-primario">Entrar</button>
+            </form>
+
+            <!-- FORMULARIO DE REGISTRO -->
+            <form id="form-registro" class="formulario">
+                <h2>Crea una cuenta</h2>
+                <p class="subtitulo">Únete para gestionar tu inventario.</p>
+                
+                <div class="input-group">
+                    <label for="reg-nombre">Nombre Completo</label>
+                    <input type="text" id="reg-nombre" placeholder="Ingresa tu nombre" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="reg-email">Correo Electrónico</label>
+                    <input type="email" id="reg-email" placeholder="tu@correo.com" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="reg-password">Contraseña</label>
+                    <input type="password" id="reg-password" placeholder="Mínimo 6 caracteres" required minlength="6">
+                </div>
+
+                <div class="input-group">
+                    <label for="reg-password">Confirmar Contraseña</label>
+                    <input type="password" id="reg-password" placeholder="Mínimo 6 caracteres" required minlength="6">
+                </div>
+
+                <button type="submit" class="btn-primario">Registrarse</button>
+            </form>
+
+        </div>
+    </main>
+
+    <!-- Lógica para cambiar entre pestañas -->
+    <script>
+        function mostrarFormulario(tipo) {
+            // Ocultar todos los formularios
+            document.getElementById('form-login').classList.remove('active');
+            document.getElementById('form-registro').classList.remove('active');
+            
+            // Quitar la clase 'active' de todos los botones de pestaña
+            const botones = document.querySelectorAll('.tab-btn');
+            botones.forEach(btn => btn.classList.remove('active'));
+
+            // Mostrar el formulario seleccionado y activar su botón
+            if (tipo === 'login') {
+                document.getElementById('form-login').classList.add('active');
+                botones[0].classList.add('active');
+            } else {
+                document.getElementById('form-registro').classList.add('active');
+                botones[1].classList.add('active');
+            }
+        }
+
+        // Función simple para simular la recuperación de contraseña
+        function recuperarPassword(event) {
+            event.preventDefault(); // Evita que la página se recargue
+            let correo = prompt("Por favor, ingresa tu correo electrónico para enviarte el enlace de recuperación:");
+            if (correo) {
+                alert("Si el correo " + correo + " está registrado, recibirás un enlace para restablecer tu contraseña.");
+            }
+        }
+    </script>
+</body>
+</html>

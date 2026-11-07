@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema-Inventario - Atlas</title>
+    <!-- Enlace al archivo CSS externo -->
+    <link rel="stylesheet" href="Inventario.css">
+</head>
+<body>
+
+    <!-- HEADER / MENÚ DE NAVEGACIÓN -->
+    <header class="header-atlas">
+        <div class="header-eslogan">
+            <p>Te brindamos confianza, inventario surtido y asesoría<br>técnica que convierten cada compra en un cliente<br>recurrente.</p>
+        </div>
+        
+        <div class="logo-container">
+            <img src="imagenes/logo1.png" alt="Ferretería Atlas Construcciones">
+        </div>
+    </header>
+
+        <!-- ========================================== -->
+        <!-- SISTEMA DE INVENTARIO (Tu código original) -->
+        <!-- ========================================== -->
+        <div class="inventario-container">
+            <h2>Gestión de Inventario</h2>
+            
+            <div class="form-group">
+                <input type="text" id="nombre" placeholder="Nombre del producto">
+                <input type="text" id="categoria" placeholder="Categoría">
+                <input type="number" id="precio" placeholder="Precio">
+                <input type="number" id="cantidad" placeholder="Cantidad">
+            </div>
+            
+            <p id="mensaje"></p>
+
+            <table id="tabla">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Categoría</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aquí se muestran los productos -->
+                </tbody>
+            </table>
+            <br>
+            
+            <div class="acciones">
+                <button onclick="agregar()" class="btn-agregar">Agregar</button>
+                <button onclick="actualizar()" class="btn-actualizar">Actualizar</button>
+                <button onclick="borrar()" class="btn-borrar">Borrar</button>
+                <button onclick="salir()" class="btn-salir">Salir</button>
+            </div>
+        </div>
+
+        <div class="inventario-container">
+            <h2>Productos disponibles</h2>
+            
+            <div class="form-group">
+                <input type="text" id="nombre" placeholder="Nombre del producto">
+                <input type="text" id="categoria" placeholder="Categoría">
+                <input type="number" id="precio" placeholder="Precio">
+                <input type="number" id="cantidad" placeholder="Cantidad">
+            </div>
+            
+            <p id="mensaje"></p>
+
+            <table id="tabla">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Categoría</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aquí se muestran los productos -->
+                </tbody>
+            </table>
+            <br>
+            
+            <div class="acciones">
+                <button onclick="actualizar()" class="btn-actualizar">Actualizar</button>
+                <button onclick="borrar()" class="btn-borrar">Borrar</button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Lógica del inventario (Sin cambios) -->
+    <script>
+        let productos = [];
+        let idActual = 1;
+        let idSeleccionado = null;
+
+        function mostrarTabla() {
+            let tbody = document.querySelector("#tabla tbody");
+            tbody.innerHTML = "";
+            for (let i = 0; i < productos.length; i++) {
+                let p = productos[i];
+                let fila = "<tr onclick='seleccionar(" + p.id + ")'>";
+                fila += "<td>" + p.id + "</td>";
+                fila += "<td>" + p.nombre + "</td>";
+                fila += "<td>" + p.categoria + "</td>";
+                fila += "<td>$" + p.precio + "</td>";
+                fila += "<td>" + p.cantidad + "</td>";
+                fila += "</tr>";
+                tbody.innerHTML += fila;
+            }
+        }
+
+        function seleccionar(id) {
+            idSeleccionado = id;
+            for (let i = 0; i < productos.length; i++) {
+                if (productos[i].id === id) {
+                    document.getElementById("nombre").value = productos[i].nombre;
+                    document.getElementById("categoria").value = productos[i].categoria;
+                    document.getElementById("precio").value = productos[i].precio;
+                    document.getElementById("cantidad").value = productos[i].cantidad;
+                }
+            }
+        }
+
+        function limpiar() {
+            document.getElementById("nombre").value = "";
+            document.getElementById("categoria").value = "";
+            document.getElementById("precio").value = "";
+            document.getElementById("cantidad").value = "";
+            idSeleccionado = null;
+        }
+
+        function agregar() {
+            let nombre = document.getElementById("nombre").value;
+            let categoria = document.getElementById("categoria").value;
+            let precio = document.getElementById("precio").value;
+            let cantidad = document.getElementById("cantidad").value;
+
+            if (nombre === "" || categoria === "" || precio === "" || cantidad === "") {
+                document.getElementById("mensaje").innerText = "Complete todos los campos";
+                return;
+            }
+
+            productos.push({ id: idActual, nombre: nombre, categoria: categoria, precio: precio, cantidad: cantidad });
+            idActual++;
+            limpiar();
+            mostrarTabla();
+            document.getElementById("mensaje").innerText = "Producto agregado";
+        }
+
+        function actualizar() {
+            if (idSeleccionado === null) {
+                document.getElementById("mensaje").innerText = "Seleccione un producto de la tabla";
+                return;
+            }
+
+            let nombre = document.getElementById("nombre").value;
+            let categoria = document.getElementById("categoria").value;
+            let precio = document.getElementById("precio").value;
+            let cantidad = document.getElementById("cantidad").value;
+
+            for (let i = 0; i < productos.length; i++) {
+                if (productos[i].id === idSeleccionado) {
+                    productos[i].nombre = nombre;
+                    productos[i].categoria = categoria;
+                    productos[i].precio = precio;
+                    productos[i].cantidad = cantidad;
+                }
+            }
+            limpiar();
+            mostrarTabla();
+            document.getElementById("mensaje").innerText = "Producto actualizado";
+        }
+
+        function borrar() {
+            if (idSeleccionado === null) {
+                document.getElementById("mensaje").innerText = "Seleccione un producto de la tabla";
+                return;
+            }
+
+            let nuevosProductos = [];
+            for (let i = 0; i < productos.length; i++) {
+                if (productos[i].id !== idSeleccionado) {
+                    nuevosProductos.push(productos[i]);
+                }
+            }
+            productos = nuevosProductos;
+            limpiar();
+            mostrarTabla();
+            document.getElementById("mensaje").innerText = "Producto borrado";
+        }
+
+        function salir() {
+            productos = [];
+            idActual = 1;
+            limpiar();
+            mostrarTabla();
+            document.getElementById("mensaje").innerText = "Sistema cerrado. Inventario vacío.";
+        }
+    </script>
+</body>
+</html>

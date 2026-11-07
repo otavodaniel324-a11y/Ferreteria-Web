@@ -1,0 +1,142 @@
+/* =========================================
+   VARIABLES GLOBALES Y RESET
+   ========================================= */
+:root {
+    --amarillo-atlas: #f1c40f; /* Amarillo de la marca */
+    --negro-header: #1e1e1e;   /* Fondo oscuro del menú */
+    --fondo-pagina: #eef1f6;   /* Gris muy claro del fondo */
+    --blanco: #ffffff;
+    --texto-oscuro: #333333;
+    --texto-gris: #7f8c8d;
+    --fuente: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--fuente);
+}
+
+body {
+    background-color: var(--fondo-pagina);
+    color: var(--texto-oscuro);
+    padding-bottom: 50px; /* Espacio al final de la página */
+}
+
+/* =========================================
+   HEADER (ESTILO DE LA IMAGEN)
+   ========================================= */
+.header-atlas {
+    background-color: var(--negro-header);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    border-bottom: 4px solid var(--amarillo-atlas); /* Línea amarilla inferior */
+    color: var(--blanco);
+}
+
+.header-eslogan p {
+    font-size: 12px;
+    font-style: italic;
+    color: #bdc3c7;
+    line-height: 1.5;
+}
+
+.logo-container img {
+    max-height: 50px;
+    display: block;
+}
+
+/* =========================================
+   CONTENIDO PRINCIPAL Y TÍTULOS
+   ========================================= */
+.main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.titulo-seccion {
+    margin-bottom: 40px;
+}
+
+.titulo-seccion h1 {
+    font-size: 32px;
+    color: #111;
+    margin-bottom: 10px;
+}
+
+.linea-amarilla {
+    width: 60px;
+    height: 4px;
+    background-color: var(--amarillo-atlas);
+}
+
+/* =========================================
+   SECCIÓN DE SERVICIOS (TARJETAS)
+   ========================================= */
+.grid-servicios {
+    display: grid;
+    /* Crea columnas automáticas (aprox 3 en pantallas grandes) */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.tarjeta-servicio {
+    background-color: var(--blanco);
+    padding: 35px 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Borde superior amarillo sutil para mantener la línea gráfica */
+    border-top: 4px solid var(--amarillo-atlas); 
+}
+
+/* Efecto al pasar el mouse por encima */
+.tarjeta-servicio:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.icono-servicio {
+    font-size: 45px;
+    margin-bottom: 20px;
+    /* Círculo de fondo amarillo pálido para resaltar el icono */
+    background-color: #fff9db; 
+    width: 90px;
+    height: 90px;
+    line-height: 90px;
+    border-radius: 50%;
+    margin: 0 auto 20px auto;
+}
+
+.tarjeta-servicio h3 {
+    font-size: 20px;
+    color: var(--negro-header);
+    margin-bottom: 15px;
+}
+
+.tarjeta-servicio p {
+    font-size: 14px;
+    color: var(--texto-gris);
+    line-height: 1.6;
+}
+
+/* =========================================
+   DISEÑO RESPONSIVO
+   ========================================= */
+@media (max-width: 768px) {
+    .header-atlas {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+        padding: 20px;
+    }
+    
+    .grid-servicios {
+        grid-template-columns: 1fr; /* Una sola columna en celulares */
+    }
+}
