@@ -25,7 +25,7 @@
             min-height: 100vh;
         }
 
-        /* ===== BARRA SUPERIOR (igual al dashboard) ===== */
+        /* ===== BARRA SUPERIOR ===== */
         .topbar {
             background: var(--negro);
             border-bottom: 5px solid var(--amarillo);
@@ -44,30 +44,6 @@
             line-height: 1.6;
             color: #c9ccd3;
         }
-
-        .topbar nav {
-            display: flex;
-            gap: 28px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .topbar nav a {
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 700;
-            text-transform: uppercase;
-            padding: 10px 16px;
-            border-radius: 4px;
-        }
-
-        .topbar nav a.activo {
-            background: var(--amarillo);
-            color: var(--negro);
-        }
-
-        .topbar nav a:hover:not(.activo) { color: var(--amarillo); }
 
         .topbar img {
          height: 80px;
@@ -120,7 +96,6 @@
 
         .btn-factura-neon:hover { background: #ffc61a; transform: translateY(-1px); }
         .btn-factura-neon:active { transform: translateY(0); }
-        .btn-factura-neon:focus-visible { outline: 3px solid var(--negro); outline-offset: 3px; }
 
         /* ===== FACTURA (tarjeta) ===== */
         .factura {
@@ -204,8 +179,9 @@
             padding: 12px 14px;
         }
 
-        thead th:nth-child(n+3),
-        tbody td:nth-child(n+3) { text-align: right; }
+        /* Alineación a la derecha para cantidades y precios (de la 4ta columna en adelante) */
+        thead th:nth-child(n+4),
+        tbody td:nth-child(n+4) { text-align: right; }
 
         tbody td {
             padding: 14px;
@@ -236,6 +212,19 @@
             font-size: 26px;
             font-weight: 800;
             color: var(--amarillo);
+        }
+
+        .factura-pago {
+            margin-top: 16px;
+            display: flex;
+            justify-content: flex-end;
+            font-size: 14px;
+            color: var(--texto-suave);
+        }
+        
+        .factura-pago strong {
+            color: var(--texto);
+            margin-left: 6px;
         }
 
         .factura-footer {
@@ -283,7 +272,8 @@
             color: var(--texto-suave);
         }
 
-        .formulario input {
+        .formulario input, 
+        .formulario select {
             font-family: inherit;
             font-size: 14px;
             color: var(--texto);
@@ -294,15 +284,17 @@
             width: 100%;
         }
 
-        .formulario input:focus {
+        .formulario input:focus,
+        .formulario select:focus {
             outline: none;
             border-color: var(--amarillo);
             box-shadow: 0 0 0 3px rgba(245, 180, 0, 0.25);
         }
 
+        /* Ajuste para la fila de productos (6 columnas ahora) */
         .fila-producto {
             display: grid;
-            grid-template-columns: 110px 1fr 90px 140px 44px;
+            grid-template-columns: 90px 1fr 1fr 70px 110px 44px;
             gap: 12px;
             align-items: end;
             margin-bottom: 14px;
@@ -359,7 +351,8 @@
                 padding-bottom: 14px;
                 border-bottom: 1px solid var(--borde);
             }
-            .fila-producto .campo:nth-child(2) { grid-column: 1 / -1; }
+            .fila-producto .campo:nth-child(2),
+            .fila-producto .campo:nth-child(3) { grid-column: 1 / -1; }
             .btn-quitar { grid-column: 1 / -1; }
             .form-acciones .btn-factura-neon { width: 100%; }
         }
@@ -393,43 +386,47 @@
     </header>
 
     <main class="contenedor">
-        <h2>Factura electrónica</h2>
+        <h2>Factura</h2>
 
         <!-- FORMULARIO -->
         <form id="form-factura" class="formulario">
             <h3>Datos del cliente</h3>
             <div class="campos">
                 <div class="campo">
-                    <label for="cliente">Nombre</label>
-                    <input type="text" id="cliente" placeholder="Pedro" required>
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" placeholder="Pedro" required>
                 </div>
                 <div class="campo">
-                    <label for="cliente">Apellidos</label>
-                    <input type="text" id="cliente" placeholder="Corrales" required>
+                    <label for="apellidos">Apellidos</label>
+                    <input type="text" id="apellidos" placeholder="Corrales" required>
                 </div>
                 <div class="campo">
-                    <label for="documento">NIT</label>
+                    <label for="documento">NIT / CC</label>
                     <input type="text" id="documento" placeholder="123.456.789-0" required>
-                </div>
-                <div class="campo">
-                    <label for="documento">CC</label>
-                    <input type="text" id="documento" placeholder="108398339" required>
                 </div>
                 <div class="campo">
                     <label for="direccion">Dirección</label>
                     <input type="text" id="direccion" placeholder="Carrera 10 #20-30" required>
                 </div>
                 <div class="campo">
-                    <label for="direccion">Teléfono</label>
-                    <input type="text" id="direccion" placeholder="Ingresar numero" required>
+                    <label for="telefono">Teléfono</label>
+                    <input type="text" id="telefono" placeholder="300 123 4567" required>
+                </div>
+                <div class="campo">
+                    <label for="metodo-pago">Método de Pago</label>
+                    <select id="metodo-pago" required>
+                        <option value="Efectivo">Efectivo</option>
+                        <option value="Transferencia">Transferencia</option>
+                        <option value="Crédito / Fiado">Crédito / Fiado</option>
+                    </select>
                 </div>
             </div>
 
-            <h3>Productos</h3>
+            <h3>Datos del Producto</h3>
             <div id="productos"></div>
             <button type="button" id="btn-agregar" class="btn-secundario">+ Agregar producto</button>
 
-            <!-- BOTÓN IMPRESIÓN FACTURA (al final del formulario) -->
+            <!-- BOTÓN IMPRESIÓN FACTURA -->
             <div class="form-acciones">
                 <button id="btn-factura-electronica" class="btn-factura-neon" type="submit">
                     🧾 Impresión de Factura
@@ -437,7 +434,7 @@
             </div>
         </form>
 
-        <!-- FACTURA DE EJEMPLO -->
+        <!-- FACTURA -->
         <div id="factura" class="factura">
             <div class="factura-header">
                 <h1>FACTURA</h1>
@@ -458,7 +455,7 @@
                 <div>
                     <span class="label">Cliente:</span> <span id="f-cliente"></span><br>
                     <span class="label">NIT/CC:</span> <span id="f-documento"></span><br>
-                    <span class="label">Dirección:</span> <span id="f-direccion"></span>
+                    <span class="label">Teléfono:</span> <span id="f-telefono"></span>
                 </div>
             </div>
 
@@ -466,6 +463,7 @@
                 <thead>
                     <tr>
                         <th>Código</th>
+                        <th>Producto</th>
                         <th>Descripción</th>
                         <th>Cant.</th>
                         <th>Vr. Unit.</th>
@@ -477,6 +475,10 @@
 
             <div class="total">
                 TOTAL A PAGAR: <span id="f-total">$0</span>
+            </div>
+
+            <div class="factura-pago">
+                Método de Pago: <strong id="f-metodo-pago"></strong>
             </div>
 
             <div class="factura-footer">
@@ -500,10 +502,12 @@
                 fila.className = 'fila-producto';
                 fila.innerHTML = `
                     <div class="campo"><label>Código</label><input type="text" class="p-codigo" placeholder="P001" required></div>
-                    <div class="campo"><label>Descripción</label><input type="text" class="p-desc" placeholder="Producto o servicio" required></div>
+                    <div class="campo"><label>Producto</label><input type="text" class="p-nombre" placeholder="Ej: Tornillos" required></div>
+                    <div class="campo"><label>Descripción</label><input type="text" class="p-desc" placeholder="Ej: 2 pulgadas" required></div>
                     <div class="campo"><label>Cant.</label><input type="number" class="p-cant" min="1" value="1" required></div>
                     <div class="campo"><label>Vr. Unit.</label><input type="number" class="p-precio" min="0" step="any" placeholder="50000" required></div>
                     <button type="button" class="btn-quitar" title="Quitar producto" aria-label="Quitar producto">&times;</button>`;
+                
                 fila.querySelector('.btn-quitar').addEventListener('click', function() {
                     if (contenedor.children.length > 1) fila.remove();
                 });
@@ -521,9 +525,11 @@
                 $('f-numero').textContent = 'FE-' + ahora.getFullYear() + '-' + String(Date.now()).slice(-4);
                 $('f-fecha').textContent = ahora.toLocaleDateString('es-CO');
                 $('f-hora').textContent = ahora.toLocaleTimeString('es-CO', { hour12: false });
-                $('f-cliente').textContent = $('cliente').value;
+                
+                $('f-cliente').textContent = $('nombre').value + ' ' + $('apellidos').value;
                 $('f-documento').textContent = $('documento').value;
-                $('f-direccion').textContent = $('direccion').value;
+                $('f-telefono').textContent = $('telefono').value;
+                $('f-metodo-pago').textContent = $('metodo-pago').value;
 
                 const tbody = $('f-items');
                 tbody.innerHTML = '';
@@ -536,9 +542,15 @@
                     total += sub;
 
                     const tr = document.createElement('tr');
-                    [fila.querySelector('.p-codigo').value,
-                     fila.querySelector('.p-desc').value,
-                     cant, pesos(precio), pesos(sub)].forEach(function(valor) {
+                    // Capturamos los 6 valores en orden
+                    [
+                        fila.querySelector('.p-codigo').value,
+                        fila.querySelector('.p-nombre').value,
+                        fila.querySelector('.p-desc').value,
+                        cant, 
+                        pesos(precio), 
+                        pesos(sub)
+                    ].forEach(function(valor) {
                         const td = document.createElement('td');
                         td.textContent = valor;
                         tr.appendChild(td);
@@ -551,7 +563,6 @@
                 factura.classList.add('visible');
                 factura.scrollIntoView({ behavior: 'smooth' });
 
-                // Pequeña espera para que el navegador renderice el cambio y luego imprimir
                 setTimeout(() => { window.print(); }, 300);
             });
         });
