@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impresión de Factura Electrónica</title>
+    <style>
+        :root {
+            --negro: #1c1c24;
+            --amarillo: #f5b400;
+            --fondo: #f3f4f6;
+            --tarjeta: #ffffff;
+            --borde: #e5e7eb;
+            --texto: #1c1c24;
+            --texto-suave: #6b7280;
+            --verde: #27ae60;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+            background: var(--fondo);
+            color: var(--texto);
+            min-height: 100vh;
+        }
+
+        /* ===== BARRA SUPERIOR (igual al dashboard) ===== */
+        .topbar {
+            background: var(--negro);
+            border-bottom: 5px solid var(--amarillo);
+            padding: 20px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .topbar .lema {
+            max-width: 320px;
+            font-size: 13px;
+            font-style: italic;
+            line-height: 1.6;
+            color: #c9ccd3;
+        }
+
+        .topbar nav {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .topbar nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 10px 16px;
+            border-radius: 4px;
+        }
+
+        .topbar nav a.activo {
+            background: var(--amarillo);
+            color: var(--negro);
+        }
+
+        .topbar nav a:hover:not(.activo) { color: var(--amarillo); }
+
+        .topbar img {
+         height: 80px;
+         width: auto;
+         border-radius: 4px;
+        }
+
+        /* ===== CONTENIDO ===== */
+        .contenedor {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 48px 24px 64px;
+        }
+
+        .contenedor > h2 {
+            font-size: 34px;
+            font-weight: 800;
+            padding-bottom: 14px;
+            position: relative;
+            margin-bottom: 32px;
+        }
+
+        .contenedor > h2::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--amarillo);
+            border-radius: 2px;
+        }
+
+        /* ===== BOTÓN ===== */
+        .btn-factura-neon {
+            background: var(--amarillo);
+            color: var(--negro);
+            border: none;
+            border-radius: 6px;
+            padding: 14px 28px;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            transition: background 0.15s, transform 0.15s;
+        }
+
+        .btn-factura-neon:hover { background: #ffc61a; transform: translateY(-1px); }
+        .btn-factura-neon:active { transform: translateY(0); }
+        .btn-factura-neon:focus-visible { outline: 3px solid var(--negro); outline-offset: 3px; }
+
+        /* ===== FACTURA (tarjeta) ===== */
+        .factura {
+            display: none;
+            margin-top: 32px;
+            background: var(--tarjeta);
+            border: 1px solid var(--borde);
+            border-top: 4px solid var(--amarillo);
+            border-radius: 6px;
+            padding: 32px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+        }
+
+        .factura.visible { display: block; }
+
+        .factura-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 24px;
+            padding-bottom: 20px;
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--borde);
+        }
+
+        .factura-header h1 {
+            font-size: 30px;
+            font-weight: 800;
+            padding-left: 12px;
+            border-left: 4px solid var(--amarillo);
+        }
+
+        .empresa {
+            text-align: right;
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--texto-suave);
+        }
+
+        .empresa strong { color: var(--texto); font-size: 16px; }
+
+        .factura-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .factura-info > div {
+            background: var(--fondo);
+            border: 1px solid var(--borde);
+            border-radius: 6px;
+            padding: 16px 18px;
+            font-size: 14px;
+            line-height: 1.9;
+        }
+
+        .label {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--texto-suave);
+            margin-right: 4px;
+        }
+
+        /* ===== TABLA ===== */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        thead th {
+            background: var(--negro);
+            color: #ffffff;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 12px 14px;
+        }
+
+        thead th:nth-child(n+3),
+        tbody td:nth-child(n+3) { text-align: right; }
+
+        tbody td {
+            padding: 14px;
+            border-bottom: 1px solid var(--borde);
+        }
+
+        tbody tr:nth-child(even) { background: #fafafa; }
+
+        /* ===== TOTAL ===== */
+        .total {
+            margin-top: 24px;
+            margin-left: auto;
+            max-width: 340px;
+            background: var(--negro);
+            color: #ffffff;
+            border-bottom: 4px solid var(--amarillo);
+            border-radius: 6px;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .total span {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--amarillo);
+        }
+
+        .factura-footer {
+            margin-top: 28px;
+            padding-top: 16px;
+            border-top: 1px solid var(--borde);
+            text-align: center;
+            font-size: 13px;
+            line-height: 1.7;
+            color: var(--texto-suave);
+        }
+
+        /* ===== FORMULARIO ===== */
+        .formulario {
+            background: var(--tarjeta);
+            border: 1px solid var(--borde);
+            border-top: 4px solid var(--amarillo);
+            border-radius: 6px;
+            padding: 32px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+        }
+
+        .formulario h3 {
+            font-size: 18px;
+            font-weight: 700;
+            padding-left: 12px;
+            border-left: 4px solid var(--amarillo);
+            margin-bottom: 18px;
+        }
+
+        .formulario h3:not(:first-child) { margin-top: 32px; }
+
+        .campos {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .campo { display: flex; flex-direction: column; gap: 6px; }
+
+        .campo label {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--texto-suave);
+        }
+
+        .formulario input {
+            font-family: inherit;
+            font-size: 14px;
+            color: var(--texto);
+            background: #ffffff;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 11px 12px;
+            width: 100%;
+        }
+
+        .formulario input:focus {
+            outline: none;
+            border-color: var(--amarillo);
+            box-shadow: 0 0 0 3px rgba(245, 180, 0, 0.25);
+        }
+
+        .fila-producto {
+            display: grid;
+            grid-template-columns: 110px 1fr 90px 140px 44px;
+            gap: 12px;
+            align-items: end;
+            margin-bottom: 14px;
+        }
+
+        .btn-quitar {
+            height: 42px;
+            background: #ffffff;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            color: #c0392b;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .btn-quitar:hover { background: #fdecea; border-color: #c0392b; }
+
+        .btn-secundario {
+            background: var(--negro);
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            padding: 11px 18px;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        .btn-secundario:hover { background: #2d2d38; }
+
+        .form-acciones {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid var(--borde);
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 640px) {
+            .topbar { padding: 16px; }
+            .factura { padding: 20px; }
+            .factura-header { flex-direction: column; }
+            .empresa { text-align: left; }
+            .factura-info { grid-template-columns: 1fr; }
+            .total { max-width: none; }
+            .formulario { padding: 20px; }
+            .campos { grid-template-columns: 1fr; }
+            .fila-producto {
+                grid-template-columns: 1fr 1fr;
+                padding-bottom: 14px;
+                border-bottom: 1px solid var(--borde);
+            }
+            .fila-producto .campo:nth-child(2) { grid-column: 1 / -1; }
+            .btn-quitar { grid-column: 1 / -1; }
+            .form-acciones .btn-factura-neon { width: 100%; }
+        }
+
+        /* ===== IMPRESIÓN: solo se imprime la factura ===== */
+        @media print {
+            body { background: #ffffff; }
+            .topbar,
+            .contenedor > h2,
+            .formulario,
+            .btn-factura-neon { display: none !important; }
+            .contenedor { padding: 0; max-width: none; }
+            .factura {
+                display: block !important;
+                margin: 0;
+                box-shadow: none;
+                border: 1px solid var(--borde);
+                border-top: 4px solid var(--amarillo);
+            }
+            thead th, .total, .factura-info > div {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="topbar">
+        <p class="lema">Te brindamos confianza, inventario surtido y asesoría técnica que convierten cada compra en un cliente recurrente.</p>
+        <img src="Imagenes/Logo1.png" alt="Logo">
+    </header>
+
+    <main class="contenedor">
+        <h2>Factura electrónica</h2>
+
+        <!-- FORMULARIO -->
+        <form id="form-factura" class="formulario">
+            <h3>Datos del cliente</h3>
+            <div class="campos">
+                <div class="campo">
+                    <label for="cliente">Nombre</label>
+                    <input type="text" id="cliente" placeholder="Pedro" required>
+                </div>
+                <div class="campo">
+                    <label for="cliente">Apellidos</label>
+                    <input type="text" id="cliente" placeholder="Corrales" required>
+                </div>
+                <div class="campo">
+                    <label for="documento">NIT</label>
+                    <input type="text" id="documento" placeholder="123.456.789-0" required>
+                </div>
+                <div class="campo">
+                    <label for="documento">CC</label>
+                    <input type="text" id="documento" placeholder="108398339" required>
+                </div>
+                <div class="campo">
+                    <label for="direccion">Dirección</label>
+                    <input type="text" id="direccion" placeholder="Carrera 10 #20-30" required>
+                </div>
+                <div class="campo">
+                    <label for="direccion">Teléfono</label>
+                    <input type="text" id="direccion" placeholder="Ingresar numero" required>
+                </div>
+            </div>
+
+            <h3>Productos</h3>
+            <div id="productos"></div>
+            <button type="button" id="btn-agregar" class="btn-secundario">+ Agregar producto</button>
+
+            <!-- BOTÓN IMPRESIÓN FACTURA (al final del formulario) -->
+            <div class="form-acciones">
+                <button id="btn-factura-electronica" class="btn-factura-neon" type="submit">
+                    🧾 Impresión de Factura
+                </button>
+            </div>
+        </form>
+
+        <!-- FACTURA DE EJEMPLO -->
+        <div id="factura" class="factura">
+            <div class="factura-header">
+                <h1>FACTURA</h1>
+                <div class="empresa">
+                    <strong>TECNOLOGY</strong><br>
+                    NIT: 900.123.456-7<br>
+                    Dirección: Calle 123 #45-67<br>
+                    Tel: (601) 123 4567
+                </div>
+            </div>
+
+            <div class="factura-info">
+                <div>
+                    <span class="label">Factura No:</span> <span id="f-numero"></span><br>
+                    <span class="label">Fecha:</span> <span id="f-fecha"></span><br>
+                    <span class="label">Hora:</span> <span id="f-hora"></span>
+                </div>
+                <div>
+                    <span class="label">Cliente:</span> <span id="f-cliente"></span><br>
+                    <span class="label">NIT/CC:</span> <span id="f-documento"></span><br>
+                    <span class="label">Dirección:</span> <span id="f-direccion"></span>
+                </div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Descripción</th>
+                        <th>Cant.</th>
+                        <th>Vr. Unit.</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody id="f-items"></tbody>
+            </table>
+
+            <div class="total">
+                TOTAL A PAGAR: <span id="f-total">$0</span>
+            </div>
+
+            <div class="factura-footer">
+                Esta es una factura electrónica generada para fines de ejemplo.<br>
+                Gracias por su preferencia.
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('form-factura');
+            const contenedor = document.getElementById('productos');
+            const factura = document.getElementById('factura');
+            const pesos = n => '$' + Math.round(n).toLocaleString('es-CO');
+            const $ = id => document.getElementById(id);
+
+            // Crea una fila de producto en el formulario
+            function agregarFila() {
+                const fila = document.createElement('div');
+                fila.className = 'fila-producto';
+                fila.innerHTML = `
+                    <div class="campo"><label>Código</label><input type="text" class="p-codigo" placeholder="P001" required></div>
+                    <div class="campo"><label>Descripción</label><input type="text" class="p-desc" placeholder="Producto o servicio" required></div>
+                    <div class="campo"><label>Cant.</label><input type="number" class="p-cant" min="1" value="1" required></div>
+                    <div class="campo"><label>Vr. Unit.</label><input type="number" class="p-precio" min="0" step="any" placeholder="50000" required></div>
+                    <button type="button" class="btn-quitar" title="Quitar producto" aria-label="Quitar producto">&times;</button>`;
+                fila.querySelector('.btn-quitar').addEventListener('click', function() {
+                    if (contenedor.children.length > 1) fila.remove();
+                });
+                contenedor.appendChild(fila);
+            }
+
+            agregarFila();
+            $('btn-agregar').addEventListener('click', agregarFila);
+
+            // Al enviar el formulario: llena la factura e imprime
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const ahora = new Date();
+                $('f-numero').textContent = 'FE-' + ahora.getFullYear() + '-' + String(Date.now()).slice(-4);
+                $('f-fecha').textContent = ahora.toLocaleDateString('es-CO');
+                $('f-hora').textContent = ahora.toLocaleTimeString('es-CO', { hour12: false });
+                $('f-cliente').textContent = $('cliente').value;
+                $('f-documento').textContent = $('documento').value;
+                $('f-direccion').textContent = $('direccion').value;
+
+                const tbody = $('f-items');
+                tbody.innerHTML = '';
+                let total = 0;
+
+                contenedor.querySelectorAll('.fila-producto').forEach(function(fila) {
+                    const cant = parseFloat(fila.querySelector('.p-cant').value) || 0;
+                    const precio = parseFloat(fila.querySelector('.p-precio').value) || 0;
+                    const sub = cant * precio;
+                    total += sub;
+
+                    const tr = document.createElement('tr');
+                    [fila.querySelector('.p-codigo').value,
+                     fila.querySelector('.p-desc').value,
+                     cant, pesos(precio), pesos(sub)].forEach(function(valor) {
+                        const td = document.createElement('td');
+                        td.textContent = valor;
+                        tr.appendChild(td);
+                    });
+                    tbody.appendChild(tr);
+                });
+
+                $('f-total').textContent = pesos(total);
+
+                factura.classList.add('visible');
+                factura.scrollIntoView({ behavior: 'smooth' });
+
+                // Pequeña espera para que el navegador renderice el cambio y luego imprimir
+                setTimeout(() => { window.print(); }, 300);
+            });
+        });
+    </script>
+</body>
+</html>

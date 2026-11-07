@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Productos - Ferretería Atlas Construcciones</title>
+    <link rel="stylesheet" href="catalogo.css">
+</head>
+
+<body>
+
+    <header>
+        <p class="eslogan">
+            Te brindamos confianza, inventario surtido y asesoría técnica que convierten cada compra en un cliente
+            recurrentes.
+        </p>
+        <div class="logo-container">
+            <img src="imagenes/logo1.png" alt="Ferretería Atlas Construcciones">
+        </div>
+        <div>
+            <ul>
+                <li class="submenu">
+                    <img src="Imagenes/Carrito.png" id="img-carrito" alt="Carrito">
+                    <div id="carrito-desplegable">
+                        <table id="lista-carrito">
+                            <thead>
+                                <tr>
+                                    <th>Imagen</th>
+                                    <th></th>
+                                    <th>Precio</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <a href="#" id="vaciar-carrito-header" class="btn-3">vaciar carrito</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <section class="productos" aria-labelledby="titulo-productos">
+            <h1 id="titulo-productos">Catálogo de Productos</h1>
+
+            <form class="buscador" role="search" id="formulario-busqueda">
+                <label for="texto-busqueda" class="solo-lectores">Buscar productos por nombre o categoría</label>
+                <input type="search" id="texto-busqueda" name="q" placeholder="Busca por nombre o categoría"
+                    autocomplete="off">
+                <button id="busqueda" type="submit" aria-controls="lista-productos">Buscar</button>
+            </form>
+
+            <p id="estado-busqueda" role="status" aria-live="polite"></p>
+
+            <ul id="lista-productos" class="lista-productos" aria-label="Lista de productos">
+                <li data-busqueda="martillo de bola 16 oz herramientas">
+                    <img src="Imagenes/P1.png" alt="Producto">
+                    <h3>Martillo de Carpintero de Acero 794 G Longitud Total 40.64 cm</h3>
+                    <p class="categoria">Herramientas</p>
+                    <p class="precio">$219.900</p>
+                    <details>
+                        <summary>Ver características</summary>
+                        <ul>
+                            <li>Tipo:<strong>Martillos</strong></li>
+                            <li>Ancho:<strong>8.5 pulgadas</strong></li>
+                            <li>Largo:<strong>30 pulgadas</strong></li>
+                            <li>Garantía:<strong>8.5 pulgadas</strong></li>
+                            <li>Peso:<strong>1.02 kg</strong></li>
+                        </ul>
+                    </details>
+                    <div class="acciones-producto">
+                        <a href="#" class="Agregar-carrito btn-3" data-id="1">Agregar al carrito</a>
+                        <a href="Pago.html" class="btn-2">Comprar ahora</a>
+                    </div>
+                </li>
+                <li data-busqueda="Martillo De Garra">
+                    <img src="Imagenes/P19.png" alt="Producto">
+                    <img src="Imagenes/P20.png" alt="Producto">
+                    <h3>Martillo De Garra Corto 8oz Bauker</h3>
+                    <p class="categoria">Herramientas</p>
+                    <p class="precio">$29.900</p>
+                    <details>
+                        <summary>Ver características</summary>
+                        <ul>
+                            <li>Tipo:<strong>Martillos</strong></li>
+                            <li>Ancho:<strong>10.5 cm</strong></li>
+                            <li>Largo:<strong>16 cm</strong></li>
+                            <li>Espesor:<strong>2.5 cm</strong></li>
+                            <li>Peso :<strong>0.37 kg</strong></li>
+                        </ul>
+                    </details>
+                    <div class="acciones-producto">
+                        <a href="#" class="Agregar-carrito btn-3" data-id="2">Agregar al carrito</a>
+                        <a href="Pago.html" class="btn-2">Comprar ahora</a>
+                    </div>
+                </li>
+                <li data-busqueda="Martillo De Garra">
+                    <img src="Imagenes/P21.png" alt="Producto">
+                    <h3>Martillo de Albañil para Azulejo X 566.99 G de 27.94 cm</h3>
+                    <p class="categoria">Herramientas</p>
+                    <p class="precio">$199.900</p>
+                    <details>
+                        <summary>Ver características</summary>
+                        <ul>
+                            <li>Tipo:<strong>Martillos</strong></li>
+                            <li>Ancho:<strong>7.31 pulgadas</strong></li>
+                            <li>Largo:<strong>11.62 pulgadas</strong></li>
+                            <li>Espesor:<strong>1.44 pulgadas</strong></li>
+                            <li>Peso :<strong>1.13 kg</strong></li>
+                        </ul>
+                    </details>
+                    <div class="acciones-producto">
+                        <a href="#" class="Agregar-carrito btn-3" data-id="2">Agregar al carrito</a>
+                        <a href="Pago.html" class="btn-2">Comprar ahora</a>
+                    </div>
+                </li>
+                <li data-busqueda="Juego de Martillos 3 Piezas">
+                    <img src="Imagenes/P22.png" alt="Producto">
+                    <h3>Juego de Martillos 3 Piezas Uña Fibra de Vidrio 23 mm Superior</h3>
+                    <p class="categoria">Herramientas</p>
+                    <p class="precio">$89.900</p>
+                    <details>
+                        <summary>Ver características</summary>
+                        <ul>
+                            <li>Tipo:<strong>Martillos</strong></li>
+                            <li>Ancho:<strong>10 cm</strong></li>
+                            <li>Largo:<strong>30 cm</strong></li>
+                            <li>Espesor:<strong>3 cm</strong></li>
+                            <li>Peso :<strong>0.45 kg</strong></li>
+                        </ul>
+                    </details>
+                    <div class="acciones-producto">
+                        <a href="#" class="Agregar-carrito btn-3" data-id="2">Agregar al carrito</a>
+                        <a href="Pago.html" class="btn-2">Comprar ahora</a>
+                    </div>
+                </li>
+                <li data-busqueda="destornillador de pala 6 herramientas">
+                    <img src="Imagenes/P2.png" alt="Producto">
+                    <img src="Imagenes/P3.png" alt="Producto">
+                    <h3>Destornillador Pala 100 mm #6 /Profesional Ref 69-119-S"</h3>
+                    <p class="categoria">Herramientas</p>
+                    <p class="precio">$10.900</p>
+                    <details>
+                        <summary>Ver características</summary>
+                        <ul>
+                            <li>Tipo:<strong>Destornilladores pala</strong></li>
+                            <li>Referencia del Producto en el Certificado/Empaque: STHT69119</li>
+                            <li>Ancho:<strong>3 cm</strong></li>
+                            <li>Alto:<strong>26 cm</strong></li>
+                            <li>Largo:<strong>5 cm</strong></li>
+                        </ul>
+                    </details>
+                    <div class="acciones-producto">
+                        <a href="#" class="Agregar-carrito btn-3" data-id="2">Agregar al carrito</a>
+                        <a href="Pago.html" class="btn-2">Comprar ahora</a>
+                    </div>
+                </li>
+                <li data-busqueda="destornillador de pala 6 herramientas">
+                    <img src="Imagenes/P30.png" alt="Producto">
+                    <img src="Imagenes/P31.png" alt="Producto">
+                    <h3>Juego de Destornilladores y Puntas 24 Piezas Phillips Torx Plano Pz Total Tools Tacsd302462</h3>
+                    <p class="categoria">Herramientas</p>
+                    <p class="precio">$49.900</p>
+                    <details>
+                        <summary>Ver características</summary>
+                        <ul>
+                            <li>Tipo:<strong>Juego de destornilladores</strong></li>
+                            <li>Referencia del Producto en el Certificado/Empaque: STHT69119</li>
+                            <li>Ancho:<strong>17 cm</strong></li>
+                            <li>Alto:<strong>5 cm</strong></li>
+                            <li>Largo:<strong>32 cm</strong></li>
+                            <li>Tipo de trabajo:<strong>Profesional</strong></li>
+                        </ul>
+                    </details>
+                    <div class="acciones-producto">
+                        <a href="#" class="Agregar-carrito btn-3" data-id="2">Agregar al carrito</a>
+                        <a href="Pago.html" class="btn-2">Comprar ahora</a>
+                    </div>
+                </li>
+                <li data-busqueda="cinta metrica 5 m herramientas">
+                    <img src="Imagenes/P4.png" alt="Producto">
+                    <img src="Imagenes/P5.png" alt="Producto">
+                    <img src="Imagenes/P6.png" alt="Producto">
+                    <h3>Cinta Métrica Zerrutti 5 m x 19 mm x 2 Unidades</h3>
+                    <p class="categoria">Herramientas</p>
+                    <p class="precio">$49.000</p>
+                    <details>
+                        <summary>Ver características</summary>
+                        <ul>
+                            <li>Tipo:<strong>Destornilladores pala</strong></li>
+                            <li>Referencia del Producto en el Certificado/Empaque : Z CM-C08 5 x 2</li>
+                            <li>Ancho:<strong>19 cm</strong></li>
+                            <li>Largo:<strong>5 cm</strong></li>
+                            <li>Tipo de trabajo:<strong>Profesional</strong></li>
+                        </ul>
+                    </details>
+                    <div class="acciones-producto">
+                        <a href="#" class="Agregar-carrito btn-3" data-id="3">Agregar al carrito</a>
+                        <a href="Pago.html" class="btn-2">Comprar ahora</a>
+                    </div>
+                </li>
+                <li data-busqueda="cinta metrica 5 m herramientas">
+                    <img src="Imagenes/P27.png" alt="Producto">
+                    <img src="Imagenes/P28.png" alt="Producto">
+                    <h3>Flexómetro Encauchetado con 3 Frenos 5 m x 19 mm Uyustools</h3>
+                    <p class="categoria">Herramientas</p>
+                    <p class="precio">$28.900</p>
+                    <details>
+                        <summary>Ver características</summary>
+                        <ul>
+                            <li>Tipo:<strong>Flexómetros y cintas métricas</strong></li>
+                            <li>Referencia del Producto en el Certificado/Empaque: FLG9519</li>
+                            <li>Ancho:<strong>4 cm</strong></li>
+                            <li>Largo:<strong>11 cm</strong></li>
+                            <li>Alto:<strong>13 cm</strong></li>
+                        </ul>
+                    </details>
+                    <div class="acciones-producto">
+                        <a href="#" class="Agregar-carrito btn-3" data-id="3">Agregar al carrito</a>
+                        <a href="Pago.html" class="btn-2">Comprar ahora</a>
+                    </div>
+                </li>
+                <li data-busqueda="cemento gris 50 kg construccion">
+                    <img src="Imagenes/P7.png" alt="Producto">
+                    <h3>Cemento Cemex Uso General 50kg</h3>
+                    <p class="categoria">Construcción</p>
+                    <p class="precio">$32.900</p>
+                    <details>
+                        <summary>Ver características</summary>
+                        <ul>
+                            <li>Tipo:<strong>Cemento gris</strong></li>
+                            <li>Garantía:<strong>1 año</strong></li>
+                        </ul>
+                    </details>
+                    <div class="acciones-producto">
+                        <a href="#" class="Agregar-carrito btn-3" data-id="4">Agregar al carrito</a>
+                        <a href="Pago.html" class="btn-2">Comprar ahora</a>
+                    </div>
+                </li>
+                <li data-busqueda="cemento gris 50 kg construccion">
+                    <img src="Imagenes/P24.png" alt="Producto">
+                    <img src="Imagenes/P23.png" alt="Producto">
+                    <h3>Cemento Cemex Uso General 50kg</h3>
+                    <p class="categoria">Construcción</p>
+                    <p class="precio">$32.500</p>
+                    <details>
+                        <summary>Ver características</summary>
+                        <ul>
+                            <li>Tipo:<strong>Cemento gris</strong></li>
+                            <li>Garantía:<strong>1 año</strong></li>
+                        </ul>
+                    </details>
+                    <div class="acciones-producto">
+                        <a href="#" class="Agregar-carrito btn-3" data-id="4">Agregar al carrito</a>
+                        <a href="Pago.html" class="btn-2">Comprar ahora</a>
+                    </div>
+                </li>
+                <li data-busqueda="Cemento Gris Topex">
+                    <img src="Imagenes/P25.png" alt="Producto">
+                    <img src="Imagenes/P26.png" alt="Producto">
+                    <h3>Cemento Gris Topex Uso General 50kg</h3>
+                    <p class="categoria">Construcción</p>
+                    <p class="precio">$28.900</p>
+                    <details>
+                        <summary>Ver características</summary>
+                        <ul>
+                            <li>Tipo:<strong>Cemento gris</strong></li>
+                            <li>Garantía:<strong>3 meses</strong></li>
+                            <li>Referencia del Producto en el Certificado/Empaque:<strong>Cemento Topex</strong></li>
+                            <li>Ancho:<strong>40 cm</strong></li>
+                            <li>Alto :<strong>15 cm</strong></li>
+                        </ul>
+                    </details>
+                    <div class="acciones-producto">
+                        <a href="#" class="Agregar-carrito btn-3" data-id="4">Agregar al carrito</a>
+                        <a href="Pago.html" class="btn-2">Comprar ahora</a>
+                    </div>
+                </li>
+                <li data-busqueda="taladro percutor 650w herramientas">
+                    <img src="Imagenes/P8.png" alt="Producto">
+                    <img src="Imagenes/P9.png" alt="Producto">
+                    <img src="Imagenes/P10.png" alt="Producto">
+                    <h3>Kit Taladro Percutor 650W + Esmeril Angular 820W 4-1/2" Mandril 13 mm Bauker</h3>
+                    <p class="categoria">Herramientas</p>
+                    <p class="precio">$269.900</p>
+                    <details>
+                        <summary>Ver características</summary>
+                        <ul>
+                            <li>Tipo:<strong>Kit taladros 1/2 pulgada</strong></li>
+                            <li>Modelo<strong>ID650AG820</strong></li>
+                            <li>Ancho:<strong>18.5 cm</strong></li>
+                            <li>Alto:<strong>31 cm</strong></li>
+                            <li>Largo:<strong>40 cm</strong></li>
+                        </ul>
+                    </details>
+                    <div class="acciones-producto">
+                        <a href="#" class="Agregar-carrito btn-3" data-id="5">Agregar al carrito</a>
+                        <a href="Pago.html" class="btn-2">Comprar ahora</a>
+                    </div>
+                </li>
+                <li data-busqueda="pintura blanca 1 galon pinturas">
+                    <img src="Imagenes/P11.png" alt="Producto">
+                    <img src="Imagenes/P12.png" alt="Producto">
+                    <h3>Combo Pintura Para Interior Súper Lavable Premium Blanco Kolor 5 Galones + Cafetera Imusa Café
+                        City XL 12 Tazas , 1.8 Litros Negra</h3>
+                    <p class="categoria">Pinturas</p>
+                    <p class="precio">$399.900</p>
+                    <details>
+                        <summary>Ver características</summary>
+                        <ul>
+                            <li>Tipo:<strong>Pinturas Interior Súper Lavable</strong></li>
+                            <li>Lote y/o fecha de fabricación<strong>Visible en la etiqueta o rótulo que se entrega con
+                                    el producto físico, según aplique</strong></li>
+                            <li>Remoción de manchas o lavabilidad<strong>Mayor = 80%</strong></li>
+                            <li>Tipo de pintura base<strong>Látex</strong></li>
+                            <li>Nombre común o nombre genérico descriptivo<strong>Vinilo para interior</strong></li>
+                        </ul>
+                    </details>
+                    <div class="acciones-producto">
+                        <a href="#" class="Agregar-carrito btn-3" data-id="6">Agregar al carrito</a>
+                        <a href="Pago.html" class="btn-2">Comprar ahora</a>
+                    </div>
+                </li>
+                <li data-busqueda="pintura blanca 1 galon pinturas">
+                    <img src="Imagenes/P32.png" alt="Producto">
+                    <img src="Imagenes/P33.png" alt="Producto">
+                    <h3>Pintura Para Interior Súper Lavable Deluxe Blanco Kolor 5 Galones</h3>
+                    <p class="categoria">Pinturas</p>
+                    <p class="precio">$409.900</p>
+                    <details>
+                        <summary>Ver características</summary>
+                        <ul>
+                            <li>Tipo:<strong>Pinturas Interior Súper Lavable Premium</strong></li>
+                            <li>Método de aplicación:<strong>Rodillo</strong></li>
+                            <li>Dilución:<strong>20%</strong></li>
+                            <li>Acabado pintura:<strong>Mate</strong></li>
+                            <li>Tipo de pintura base :<strong>Látex</strong></li>
+                        </ul>
+                    </details>
+                    <div class="acciones-producto">
+                        <a href="#" class="Agregar-carrito btn-3" data-id="6">Agregar al carrito</a>
+                        <a href="Pago.html" class="btn-2">Comprar ahora</a>
+                    </div>
+                </li>
+                <li data-busqueda="tuberia pvc 1/2 plomeria">
+                    <img src="Imagenes/P13.png" alt="Producto">
+                    <img src="Imagenes/P14.png" alt="Producto">
+                    <h3>Válvula De Bola PVC De Doble Universal 1/2'' Soldar</h3>
+                    <p class="categoria">Plomería</p>
+                    <p class="precio">$27.900</p>
+                    <details>
+                        <summary>Ver características</summary>
+                        <ul>
+                            <li>Tipo:<strong> Válvula Bola</strong></li>
+                            <li>Normas de Fabricación:<strong>ASTM D2466</strong></li>
+                            <li>Referencia del Producto en el Certificado/Empaque:<strong>3027</strong></li>
+                            <li>Uso:<strong>En Instalaciones y redes hidraulicas, permite el cierre y apertura al paso
+                                    del agua, sus universales a cada extremo permite el desemsamble para desmotar la red
+                                    hidraulica, para hacer mantenimientos en la red o en los accesorios de la
+                                    instalación, agua fría potable. Espesor de pared SCH 40</strong></li>
+                            <li>Nombre común o nombre genérico descriptivo<strong>Vinilo para interior</strong></li>
+                        </ul>
+                    </details>
+                    <div class="acciones-producto">
+                        <a href="#" class="Agregar-carrito btn-3" data-id="7">Agregar al carrito</a>
+                        <a href="Pago.html" class="btn-2">Comprar ahora</a>
+                    </div>
+                </li>
+                <li data-busqueda="tuberia pvc">
+                    <img src="Imagenes/P29.png" alt="Producto">
+                    <h3>Tubo 4X3M Sanitaria</h3>
+                    <p class="categoria">Plomería</p>
+                    <p class="precio">$58.900</p>
+                    <details>
+                        <summary>Ver características</summary>
+                        <ul>
+                            <li>Tipo:<strong>Tubos pvc sanitario</strong></li>
+                            <li>Normas de Fabricación:<strong>Resolucion 0105 NTC 1087 y NTC 1341</strong></li>
+                            <li>Referencia del Producto en el Certificado/Empaque:<strong>3027</strong></li>
+                            <li>Uso:<strong>La tubería PVC sanitaria Pavco Wavin está diseñada para transportar agua
+                                    servida, residual doméstica, industrial, aguas lluvia y ventilación. Los tubos
+                                    vienen de extremo liso y los accesorios con campana.</strong></li>
+                            <li>Largo:<strong>3 m</strong></li>
+                        </ul>
+                    </details>
+                    <div class="acciones-producto">
+                        <a href="#" class="Agregar-carrito btn-3" data-id="7">Agregar al carrito</a>
+                        <a href="Pago.html" class="btn-2">Comprar ahora</a>
+                    </div>
+                </li>
+                <li data-busqueda="cerradura manija bari black alcoba yale">
+                    <img src="Imagenes/Imagen4.png" alt="Cerradura de manija Bari Black Yale, vista frontal">
+                    <img src="Imagenes/Imagen5.png" alt="Cerradura de manija Bari Black Yale, detalle">
+                    <h3>Cerradura Manija Bari Black Alcoba Yale</h3>
+                    <p class="categoria">Cerradura - Yale</p>
+                    <p class="precio">$155.900</p>
+                    <details>
+                        <summary>Ver características</summary>
+                        <ul>
+                            <li>Tipo:<strong>Cerraduras de manija otros acabados</strong></li>
+                            <li>Uso Cerradura : Dormitorio</li>
+                            <li>Reversible:<strong>Cerraduras de manija otros acabados</strong></li>
+                            <li>Garantía:<strong>1 año</strong></li>
+                        </ul>
+                    </details>
+                    <div class="acciones-producto">
+                        <a href="#" class="Agregar-carrito btn-3" data-id="8">Agregar al carrito</a>
+                        <a href="Pago.html" class="btn-2">Comprar ahora</a>
+                    </div>
+                </li>
+                <li data-busqueda="Cerradura Baño Manija Satin">
+                    <img src="Imagenes/P34.png" alt="Producto">
+                    <img src="Imagenes/P35.png" alt="Producto">
+                    <h3>Cerradura Baño Manija Satin</h3>
+                    <p class="categoria">Satin</p>
+                    <p class="precio">$65.900</p>
+                    <details>
+                        <summary>Ver características</summary>
+                        <ul>
+                            <li>Tipo:<strong>Cerraduras de manija acero</strong></li>
+                            <li>Alto:<strong>47 cm</strong></li>
+                            <li>Largo:<strong>43.5 cm</strong></li>
+                            <li>Uso Cerradura:<strong>Baño</strong></li>
+                        </ul>
+                    </details>
+                    <div class="acciones-producto">
+                        <a href="#" class="Agregar-carrito btn-3" data-id="8">Agregar al carrito</a>
+                        <a href="Pago.html" class="btn-2">Comprar ahora</a>
+                    </div>
+                </li>
+                <li data-busqueda="cerradura manija bari black alcoba yale">
+                    <img src="Imagenes/P15.png" alt="Producto ">
+                    <img src="Imagenes/P16.png" alt="Producto">
+                    <h3>Generador Gasolina 6.500W.120/220V 389Cc 13Hp Elit</h3>
+                    <p class="categoria">Generador</p>
+                    <p class="precio">$3.289.900</p>
+                    <details>
+                        <summary>Ver características</summary>
+                        <ul>
+                            <li>Tipo:<strong>Plantas eléctricas a gasolina</strong></li>
+                            <li>Garantía:<strong></strong>1 año</li>
+                            <li>Referencia del Producto en el Certificado/Empaque:<strong>Cerraduras de manija otros
+                                    acabados</strong>2G65</li>
+                            <li>Potencia Stan-by:<strong>5900 W</strong></li>
+                            <li>Limite superior MSNM:<strong>4810</strong></li>
+                        </ul>
+                    </details>
+                    <div class="acciones-producto">
+                        <a href="#" class="Agregar-carrito btn-3" data-id="8">Agregar al carrito</a>
+                        <a href="Pago.html" class="btn-2">Comprar ahora</a>
+                    </div>
+                </li>
+                <li data-busqueda="Sierra de Mesa 10 Pulgadas 2.000 Watts Einhell">
+                    <img src="Imagenes/P17.png" alt="Producto ">
+                    <img src="Imagenes/P18.png" alt="Producto">
+                    <h3>Sierra de Mesa 10 Pulgadas 2.000 Watts Einhell</h3>
+                    <p class="categoria">Herramientas</p>
+                    <p class="precio">$878.900</p>
+                    <details>
+                        <summary>Ver características</summary>
+                        <ul>
+                            <li>Tipo:<strong>Ingleteadoras</strong></li>
+                            <li>Garantía:<strong>2 años</strong></li>
+                            <li>Modelo<strong>TC-TS 2025/1U/4340549</strong></li>
+                            <li>Ancho: <strong>55 cm</strong></li>
+                            <li>Alto:<strong>33 cm</strong></li>
+                        </ul>
+                    </details>
+                    <div class="acciones-producto">
+                        <a href="#" class="Agregar-carrito btn-3" data-id="8">Agregar al carrito</a>
+                        <a href="Pago.html" class="btn-2">Comprar ahora</a>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section id="carrito" class="carrito" aria-labelledby="titulo-carrito" hidden>
+            <h2 id="titulo-carrito" tabindex="-1">Tu carrito</h2>
+            <p id="carrito-mensaje" role="status" hidden></p>
+            <p id="carrito-vacio">Tu carrito está vacío. Agrega productos desde el catálogo.</p>
+            <ul id="carrito-items" aria-label="Productos en el carrito"></ul>
+            <p class="carrito-total">Total: <strong id="carrito-total">$0</strong></p>
+            <button type="button" id="finalizar-compra" class="btn-finalizar">Finalizar compra</button>
+
+            <script>
+                   document.getElementById('finalizar-compra').addEventListener('click', function () {
+                   window.location.href = 'Pago-facturacion.html';
+                });
+            </script>
+            <button type="button" id="vaciar-carrito">Vaciar carrito</button>
+            <button type="button" id="cerrar-carrito">Cerrar carrito</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Ferretería Atlas Construcciones. Todos los derechos reservados.</p>
+    </footer>
+
+    <p id="aviso-carrito" class="solo-lectores" role="status" aria-live="polite"></p>
+
+    <script>
+        /* ---------- Búsqueda Corregida y Optimizada ---------- */
+        const formulario = document.getElementById('formulario-busqueda');
+        const campo = document.getElementById('texto-busqueda');
+        const estado = document.getElementById('estado-busqueda');
+        const productos = document.querySelectorAll('#lista-productos > li');
+
+        // Ignora mayúsculas, minúsculas y acentos de manera precisa
+        const normalizar = (t) => t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+
+        function filtrar() {
+            const q = normalizar(campo.value);
+            let visibles = 0;
+
+            productos.forEach((li) => {
+                // Si el atributo data-busqueda no existe, busca en el texto del h3 y categoría
+                const textoTarjeta = li.dataset.busqueda ? li.dataset.busqueda : li.textContent;
+                const coincide = normalizar(textoTarjeta).includes(q);
+
+                if (coincide) {
+                    li.style.display = ""; // Muestra el elemento respetando el Grid CSS
+                    li.removeAttribute('hidden');
+                    visibles++;
+                } else {
+                    li.style.display = "none"; // Oculta el elemento por completo
+                    li.setAttribute('hidden', 'true');
+                }
+            });
+
+            // Manejo de mensajes de estado dinámicos
+            if (q === '') {
+                estado.textContent = '';
+            } else if (visibles === 0) {
+                estado.textContent = 'No encontramos productos con "' + campo.value.trim() + '". Prueba con otra palabra.';
+            } else {
+                estado.textContent = visibles + (visibles === 1 ? ' producto encontrado' : ' productos encontrados');
+            }
+        }
+
+        // Escucha en tiempo real mientras el usuario escribe y al enviar el formulario
+        campo.addEventListener('input', filtrar);
+        formulario.addEventListener('submit', (e) => {
+            e.preventDefault();
+            filtrar();
+        });
+
+        /* ---------- Carrito e Interacciones ---------- */
+        const CLAVE = 'atlas-carrito';
+        const panel = document.getElementById('carrito');
+        const btnAbrir = document.getElementById('img-carrito');
+        const btnCerrar = document.getElementById('cerrar-carrito');
+        const tituloCarrito = document.getElementById('titulo-carrito');
+        const listaCarrito = document.getElementById('carrito-items');
+        const textoVacio = document.getElementById('carrito-vacio');
+        const mensaje = document.getElementById('carrito-mensaje');
+        const totalEl = document.getElementById('carrito-total');
+        const btnFinalizar = document.getElementById('finalizar-compra');
+        const btnVaciar = document.getElementById('vaciar-carrito');
+        const aviso = document.getElementById('aviso-carrito');
+
+        const dinero = (n) => '$' + n.toLocaleString('es-CO');
+
+        let carrito = cargar();
+
+        function cargar() {
+            try {
+                const datos = JSON.parse(localStorage.getItem(CLAVE));
+                return datos && typeof datos === 'object' ? datos : {};
+            } catch (e) {
+                console.warn('No se pudo leer localStorage:', e);
+                return {};
+            }
+        }
+        function guardar() {
+            try {
+                localStorage.setItem(CLAVE, JSON.stringify(carrito));
+            } catch (e) {
+                console.warn('No se pudo guardar en localStorage:', e);
+            }
+        }
+
+        function confirmar(boton) {
+            if (!boton) return;
+            if (!boton.dataset.texto) boton.dataset.texto = boton.textContent;
+            boton.textContent = '¡Agregado!';
+            boton.classList.add('agregado');
+            clearTimeout(boton._temporizador);
+            boton._temporizador = setTimeout(() => {
+                boton.textContent = boton.dataset.texto;
+                boton.classList.remove('agregado');
+            }, 1400);
+        }
+
+        function agregar(id, nombre, precio, boton) {
+            if (carrito[id]) {
+                carrito[id].cantidad++;
+            } else {
+                carrito[id] = {nombre, precio, cantidad: 1};
+            }
+            guardar();
+            dibujar();
+            confirmar(boton);
+            if (aviso) aviso.textContent = nombre + ' agregado al carrito.';
+        }
+
+        function dibujar() {
+            const items = Object.entries(carrito);
+            let unidades = 0;
+            let total = 0;
+
+            listaCarrito.innerHTML = '';
+            items.forEach(([id, it]) => {
+                unidades += it.cantidad;
+                total += it.precio * it.cantidad;
+
+                const li = document.createElement('li');
+                li.dataset.id = id;
+
+                li.innerHTML = `
+                    <div>
+                        <span class="item-nombre">${it.nombre}</span><br>
+                        <span class="item-precio">${dinero(it.precio)} c/u</span><br>
+                        <button type="button" class="item-quitar" data-accion="quitar">Quitar</button>
+                    </div>
+                    <div class="cantidad">
+                        <button type="button" data-accion="menos">&minus;</button>
+                        <span>${it.cantidad}</span>
+                        <button type="button" data-accion="mas">+</button>
+                        <span class="item-subtotal">${dinero(it.precio * it.cantidad)}</span>
+                    </div>
+                `;
+                listaCarrito.appendChild(li);
+            });
+
+            if (totalEl) totalEl.textContent = dinero(total);
+            if (textoVacio) textoVacio.hidden = items.length > 0;
+            if (btnFinalizar) btnFinalizar.disabled = items.length === 0;
+            if (btnVaciar) btnVaciar.disabled = items.length === 0;
+        }
+
+        function abrir() {
+            if (panel) panel.hidden = false;
+            if (tituloCarrito) tituloCarrito.focus({preventScroll: true});
+        }
+        function cerrar() {
+            if (panel) panel.hidden = true;
+        }
+
+        // Asignación de eventos a los botones de las tarjetas
+        productos.forEach((li, index) => {
+            const h3 = li.querySelector('h3');
+            const precioEl = li.querySelector('.precio');
+            if (!h3 || !precioEl) return;
+
+            const nombre = h3.textContent.trim();
+            const precio = parseInt(precioEl.textContent.replace(/\D/g, ''), 10);
+
+            const btnAgregar = li.querySelector('.Agregar-carrito');
+            const btnComprar = li.querySelector('.btn-2');
+            const id = btnAgregar?.dataset.id || normalizar(nombre) || ('prod-' + index);
+
+            if (btnAgregar) {
+                btnAgregar.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    agregar(id, nombre, precio, btnAgregar);
+                });
+            }
+
+            if (btnComprar) {
+                btnComprar.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (mensaje) mensaje.hidden = true;
+                    agregar(id, nombre, precio);
+                    abrir();
+                });
+            }
+        });
+
+        listaCarrito.addEventListener('click', (e) => {
+            const boton = e.target.closest('button[data-accion]');
+            if (!boton) return;
+            const id = boton.closest('li').dataset.id;
+            const it = carrito[id];
+            if (!it) return;
+
+            if (boton.dataset.accion === 'mas') it.cantidad++;
+            if (boton.dataset.accion === 'menos') it.cantidad--;
+            if (boton.dataset.accion === 'quitar' || it.cantidad <= 0) delete carrito[id];
+
+            guardar();
+            dibujar();
+        });
+
+        if (btnVaciar) {
+            btnVaciar.addEventListener('click', () => {
+                carrito = {};
+                guardar();
+                dibujar();
+            });
+        }
+
+        if (btnAbrir) btnAbrir.addEventListener('click', abrir);
+        if (btnCerrar) btnCerrar.addEventListener('click', cerrar);
+
+        dibujar();
+    </script>
